@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spanish Flashcards</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f0f0;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .card {
+        width: 300px;
+        height: 200px;
+        margin: auto;
+        perspective: 1000px;
+        cursor: pointer;
+    }
+
+    .inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .flipped {
+        transform: rotateY(180deg);
+    }
+
+    .front, .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        line-height: 200px;
+        font-size: 22px;
+        border-radius: 10px;
+        backface-visibility: hidden;
+    }
+
+    .front {
+        background: white;
+    }
+
+    .back {
+        background: lightblue;
+        transform: rotateY(180deg);
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Spanish Flashcards</h1>
+
+<div class="card" onclick="flipCard()">
+    <div class="inner" id="cardInner">
+        <div class="front" id="frontText"></div>
+        <div class="back" id="backText"></div>
+    </div>
+</div>
+
+<br>
+<button onclick="nextCard()">Next Card</button>
+
+<script>
+const flashcards = [
+    ["Los cereales", "Cereal"],
+    ["Las bebidas", "Drinks"],
+    ["Las grasas", "Fats"],
+    ["El pollo", "Chicken"],
+    ["El pescado", "Fish"],
+    ["El arroz", "Rice"],
+    ["Las zanahorias", "Carrots"],
+    ["Los pasteles", "Cakes"],
+    ["Las judías verdes", "Green beans"],
+    ["Caminar", "To walk"],
+    ["Correr", "To run"],
+    ["Ver la televisión", "To watch TV"],
+    ["Malo", "Bad"],
+    ["Horrible", "Horrible"],
+    ["Sabroso", "Tasty"],
+    ["Comer mucho", "To eat a lot"],
+    ["Levantar pesas", "To lift weights"],
+    ["Hacer ejercicio", "To exercise"],
+    ["Los tomates", "Tomatoes"],
+    ["El pan", "Bread"],
+    ["Los espaguetis", "Spaghetti"],
+    ["Cada día", "Every day"],
+    ["Un día", "One day"],
+    ["Todos los días", "Every day"],
+    ["El bistec", "Steak"],
+    ["Las papas", "Potatoes"],
+    ["La carne", "Meat"],
+    ["La mantequilla", "Butter"],
+    ["El helado", "Ice cream"],
+    ["La cebolla", "Onion"],
+    ["Las uvas", "Grapes"],
+    ["Los guisantes", "Peas"],
+    ["La lechuga", "Lettuce"]
+];
+
+let current = 0;
+
+function showCard() {
+    document.getElementById("frontText").innerText = flashcards[current][0];
+    document.getElementById("backText").innerText = flashcards[current][1];
+    document.getElementById("cardInner").classList.remove("flipped");
+}
+
+function flipCard() {
+    document.getElementById("cardInner").classList.toggle("flipped");
+}
+
+function nextCard() {
+    current = (current + 1) % flashcards.length;
+    showCard();
+}
+
+showCard();
+</script>
+
+</body>
+</html>
